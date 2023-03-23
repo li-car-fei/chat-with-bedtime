@@ -1,5 +1,5 @@
 import { Answer } from "@/components/Answer/Answer";
-import { Footer } from "@/components/Footer";
+// import { Footer } from "@/components/Footer";
 import { Navbar } from "@/components/Navbar";
 import { PGChunk } from "@/types";
 import { IconArrowRight, IconExternalLink, IconSearch } from "@tabler/icons-react";
@@ -309,14 +309,13 @@ export default function Home() {
               </div>
             ) : (
               <div className="text-center font-bold text-3xl mt-7">
-                Please enter your
+                设置你的
                 <a
-                  className="mx-2 underline hover:opacity-50"
+                  className="mx-2"
                   href="https://platform.openai.com/account/api-keys"
                 >
                   OpenAI API key
                 </a>
-                in settings.
               </div>
             )}
 
@@ -358,7 +357,7 @@ export default function Home() {
                         <div className="flex justify-between">
                           <div>
                             <div className="font-bold text-xl">{chunk.essay_title}</div>
-                            <div className="mt-1 font-bold text-sm">{chunk.essay_date}</div>
+                            {/* <div className="mt-1 font-bold text-sm">{chunk.essay_date}</div> */}
                           </div>
                           <a
                             className="hover:opacity-50 ml-2"
@@ -384,7 +383,7 @@ export default function Home() {
                       <div className="flex justify-between">
                         <div>
                           <div className="font-bold text-xl">{chunk.essay_title}</div>
-                          <div className="mt-1 font-bold text-sm">{chunk.essay_date}</div>
+                          {/* <div className="mt-1 font-bold text-sm">{chunk.essay_date}</div> */}
                         </div>
                         <a
                           className="hover:opacity-50 ml-2"
@@ -401,11 +400,11 @@ export default function Home() {
                 ))}
               </div>
             ) : (
-              <div className="mt-6 text-center text-lg">{`AI-powered search & chat for Paul Graham's essays.`}</div>
+              <div className="mt-6 text-center text-lg">{`与睡前消息对话`}</div>
             )}
           </div>
         </div>
-        <Footer />
+        {/* <Footer /> */}
       </div>
     </>
   );

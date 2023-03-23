@@ -1,47 +1,43 @@
-# Paul Graham GPT
+# 原项目
 
-AI-powered search and chat for [Paul Graham's](https://twitter.com/paulg) [essays](http://www.paulgraham.com/articles.html).
+使用 ChatGPT 的技术与诗歌集对话 [Paul Graham's](https://github.com/mckaywrigley/paul-graham-gpt)
 
-All code & data used is 100% open-source.
+# 睡前消息数据集
 
-## Dataset
+![](./更新情况.png)
 
-The dataset is a CSV file containing all text & embeddings used.
+从[睡前消息在线文稿](https://archive.bedtime.news/)中爬取下来，爬虫算法详见`scrape_info.ts`
 
-Download it [here](https://drive.google.com/file/d/1BxcPw2mn0VYFucc62wlt9H0nQiOu38ki/view?usp=sharing).
+根据原文章的段落分割，将数据按照`@types/index.ts`中的数据定义，先经过 ChatGPT-Embedding 后上传至[supabase](https://app.supabase.com)
 
-I recommend getting familiar with fetching, cleaning, and storing data as outlined in the scraping and embedding scripts below, but feel free to skip those steps and just use the dataset.
+上图中整理好的稿件文本，我已处理好至数据库中：[https://app.supabase.com/project/cztlxgqsdztvoirjhjqj](https://app.supabase.com/project/cztlxgqsdztvoirjhjqj)，可以自行再做处理
 
-## How It Works
+## 如何使用
 
-Paul Graham GPT provides 2 things:
+有两种使用方法:
 
-1. A search interface.
-2. A chat interface.
+1. 搜索接口
+2. chat 接口
 
-### Search
+### 搜索
 
-Search was created with [OpenAI Embeddings](https://platform.openai.com/docs/guides/embeddings) (`text-embedding-ada-002`).
+搜索功能基于 [OpenAI Embeddings](https://platform.openai.com/docs/guides/embeddings) (`text-embedding-ada-002`).
 
-First, we loop over the essays and generate embeddings for each chunk of text.
+首先将文章分段，每一段都经过 Embedding，并切数据储存在 supabase 中
 
-Then in the app we take the user's search query, generate an embedding, and use the result to find the most similar passages from the book.
+在调用时，我们的输入文字会通过 Embedding，然后和数据集所有的片段计算语义相似度，然后会返回语义最相近的结果，返回结果的数量可以在 settings 中设置
 
-The comparison is done using cosine similarity across our database of vectors.
+通过搜索接口，可以快速找到想要的相关内容片段及其对应的文稿链接，快速跳转到该文稿页面查看当期睡前消息
 
-Our database is a Postgres database with the [pgvector](https://github.com/pgvector/pgvector) extension hosted on [Supabase](https://supabase.com/).
-
-Results are ranked by similarity score and returned to the user.
+![](./images/search.png)
 
 ### Chat
 
-Chat builds on top of search. It uses search results to create a prompt that is fed into GPT-3.5-turbo.
+Chat 功能基于搜索功能，将搜索结果的片段作为 ChatGPT 的提示输入，然后让其返回相关内容描述
 
-This allows for a chat-like experience where the user can ask questions about the book and get answers.
+这样，可以实现类似于对话的功能，借助 ChatGPT 与以往所有睡前消息进行交流，让其为我们做总结、归纳、或者拓展
 
-## Running Locally
-
-Here's a quick overview of how to run it locally.
+![](./images/chat.png)
 
 ### Requirements
 
