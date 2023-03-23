@@ -12,7 +12,7 @@ const generateEmbeddings = async (essays: PGArticle[]) => {
 
   const supabase = createClient(process.env.NEXT_PUBLIC_SUPABASE_URL!, process.env.SUPABASE_SERVICE_ROLE_KEY!);
 
-  for (let i = 17; i < essays.length; i++) {
+  for (let i = 65; i < essays.length; i++) {
     const section = essays[i];
 
     for (let j = 0; j < section.chunks.length; j++) {
@@ -54,7 +54,7 @@ const generateEmbeddings = async (essays: PGArticle[]) => {
         console.log("saved", i, j);
       }
 
-      await new Promise((resolve) => setTimeout(resolve, 1500));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
     }
   }
 };

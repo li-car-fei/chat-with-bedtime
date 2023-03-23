@@ -4,7 +4,7 @@
 
 # 睡前消息数据集
 
-![](./更新情况.png)
+![](./images/update.png)
 
 从[睡前消息在线文稿](https://archive.bedtime.news/)中爬取下来，爬虫算法详见`scrape_info.ts`
 
