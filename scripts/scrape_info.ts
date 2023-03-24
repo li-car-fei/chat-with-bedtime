@@ -31,17 +31,17 @@ const getLinks = async () => {
         const $ = cheerio.load(html.data);
         const tables = $("li");
 
-        tables.each((i, table) => {
-        const links = $(table).find("a");
-        links.each((i, link) => {
-            const url = $(link).attr("href")
-            const title = $(link).text()
-            const sub_table = url?.split('/')
-            const sub_table_len = sub_table?.length
-            const article_url = sub_table_link + '/' + sub_table[sub_table_len-1]
-            linksArr.push({url: article_url, title})
-            })
-        })
+//         tables.each((i, table) => {
+//         const links = $(table).find("a");
+//         links.each((i, link) => {
+//             const url = $(link).attr("href")
+//             const title = $(link).text()
+//             const sub_table = url?.split('/')
+//             const sub_table_len = sub_table?.length
+//             const article_url = sub_table_link + '/' + sub_table[sub_table_len-1]
+//             linksArr.push({url: article_url, title})
+//             })
+//         })
     }
 
   return linksArr;
