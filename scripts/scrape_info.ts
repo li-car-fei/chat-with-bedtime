@@ -47,7 +47,7 @@ const getLinks = async () => {
   return linksArr;
 };
 
-async function fetch_data(link) {
+async function fetch_data(link:any) {
     try {
         const html = await axios.get(link)
         return html
